@@ -27,14 +27,10 @@ if (data) {
     }, [[], 0]);
 
   table
-    .map(row => {
-      const a = Math.round((row[3] * 100) / max);
-      row.push(a.toString());
-      return row;
-    })
-    .sort((r1, r2) => (parseInt(r2[5]) > parseInt(r1[5]) ? 1 : -1))
+    .map(row => [...row, Math.round((row[3] * 100) / max)])
+    .sort((r1, r2) => (r2[5] > r1[5] ? 1 : -1))
     .map(row => row
-      .map((cell, index) => cell[formatting[index][1] ? 'padStart' : 'padEnd'](formatting[index][0]))
+      .map((cell, index) => String(cell)[formatting[index][1] ? 'padStart' : 'padEnd'](formatting[index][0]))
       .join(''))
     .forEach(line => console.log(line));
 }
