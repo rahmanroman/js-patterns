@@ -15,8 +15,8 @@ const formatting = [[18, false], [10, true], [8, true], [8, true], [18, true], [
 if (data) {
   const [table, max] = data
     .split('\n')
-    .reduce(([table, max], line, index) => {
-      if (index > 1) {
+    .reduce(([table, max], line, index, origin) => {
+      if (index > 0 && index < origin.length - 1) {
         const cells = line.split(',');
         const d = parseInt(cells[3]);
         if (d > max) max = d;
